@@ -6,11 +6,14 @@
 2. Get into the container: `docker-compose exec web bash`
 3. Run inside the container: `php -S 0.0.0.0:8080`
 
+Note: you can skip step 2 and 3 running `docker-compose exec web php -S 0.0.0.0:8080`
+
 ### Requiremets
 Docker
 
 ## Usage
 
+Be sure the .csv file in the current folder or set the file folder in the curl call.
 Echo:
 ```
 $ curl -F 'file=@matrix.csv' "localhost:8080/echo"
@@ -63,6 +66,8 @@ docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:latest
 ```
 
 ### Tests
+
+Required execute `compser instal` inside container, before execute tests `endor/bin/phpunit` 
 
 ```
 # vendor/bin/phpunit --testdox                          
