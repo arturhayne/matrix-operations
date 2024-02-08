@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/../../src/Matrix.php';
+require_once __DIR__ . '/../../src/Domain/Matrix.php';
 
 class MatrixTest extends TestCase
 {
@@ -52,5 +52,21 @@ class MatrixTest extends TestCase
         $expectedProduct = 362880;
 
         $this->assertEquals($expectedProduct, $matrix->multiply());
+    }
+
+    public function testMultiplyWithEmpty()
+    {
+        $matrixArray = [];
+        $matrix = new Matrix($matrixArray);
+
+        $this->assertEquals(0, $matrix->multiply());
+    }
+
+    public function testSumWithEmpty()
+    {
+        $matrixArray = [];
+        $matrix = new Matrix($matrixArray);
+
+        $this->assertEquals(0, $matrix->sum());
     }
 }

@@ -9,6 +9,11 @@ class Matrix
         $this->matrix = $matrix;
     }
 
+    public static function create($matrix)
+    {
+        return new static($matrix);
+    }
+
     public function echo()
     {
         return $this->matrix;
@@ -34,11 +39,11 @@ class Matrix
 
     public function sum()
     {
-        return array_sum(call_user_func_array('array_merge', $this->matrix));
+        return array_sum($this->flatten());
     }
 
     public function multiply()
     {
-        return array_product(call_user_func_array('array_merge', $this->matrix));
+        return $this->flatten() ? array_product($this->flatten()) : 0;
     }
 }

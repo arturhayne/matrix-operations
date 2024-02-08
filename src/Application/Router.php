@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../Exceptions/OperationNotFoundException.php';
+
 class Router
 {
     public static function route($uri, $matrixObject)
@@ -21,8 +23,7 @@ class Router
                 return $matrixObject->multiply();
                 break;
             default:
-                http_response_code(404);
-                echo 'Not Found';
+                throw new OperationNotFoundException($uri);
                 break;
         }
     }

@@ -42,7 +42,18 @@ $ curl -F 'file=@matrix.csv' "localhost:8080/multiply"
 ```
 
 ### About the .csv file
-The input file to these functions is a matrix, of any dimension where the number of rows are equal to the number of columns (square). Each value is an integer, and there is no header row. matrix.csv is example valid input.  
+The input file to these functions is a matrix, of any dimension where the number of rows are equal to the number of columns (square). Each value is an integer, and there is no header row. matrix.csv is example valid input.
+
+## About the Code
+Main Classes:
+ - MatrixOperationHandler: the orchestrator, responsible to call and connect other classes
+ - ResponseHandler: Responsible to manage and return the response
+ - Router: Responsible to execute the proper operation acording the 'uri'
+ - FileManager: Responsible to load the file and return a matrix
+ - Matrix: Domain core class the encaspulate the operations and matrix entity
+ 
+### Flow
+index.php ->  MatrixOperationHandler -> FileManager -> Matrix -> Router -> ResponseHandler
 
 
 ### Code style
@@ -51,12 +62,53 @@ Using [oskarstark](https://github.com/OskarStark/php-cs-fixer-ga) to autofix php
 docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:latest
 ```
 
+### Tests
 
-## What we're looking for
+```
+# vendor/bin/phpunit --testdox                          
+PHPUnit 10.5.10 by Sebastian Bergmann and contributors.
 
-- The solution runs
-- The solution performs all cases correctly
-- The code is easy to read
-- The code is reasonably documented
-- The code is tested
-- The code is robust and handles invalid input and provides helpful error messages
+Runtime:       PHP 8.1.27
+Configuration: /var/www/html/phpunit.xml
+
+.........................                                         25 / 25 (100%)
+
+Time: 00:00.133, Memory: 8.00 MB
+
+File Manager
+ ✔ Is valid file
+ ✔ Process file
+ ✔ Invalid file
+ ✔ Process file does not exist
+
+Matrix
+ ✔ Echo
+ ✔ Invert
+ ✔ Flatten
+ ✔ Sum
+ ✔ Multiply
+ ✔ Multiply with empty
+ ✔ Sum with empty
+
+Matrix Operation Handler
+ ✔ Echo operation
+ ✔ Invert operation
+ ✔ Single row file
+ ✔ Empty file
+
+Response Handler
+ ✔ Show with matrix
+ ✔ Show with vector
+ ✔ Show with scalar value
+ ✔ Show with empty array
+
+Router
+ ✔ Router with data set 0
+ ✔ Router with data set 1
+ ✔ Router with data set 2
+ ✔ Router with data set 3
+ ✔ Router with data set 4
+ ✔ Invalid route
+
+OK (25 tests, 28 assertions)
+```
