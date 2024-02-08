@@ -2,12 +2,12 @@
 
 ## How to run:
 
-### Requiremets
-Docker
-
 1. Build the container:  `docker-compose up -d`
 2. Get into the container: `docker-compose exec web bash`
 3. Run inside the container: `php -S 0.0.0.0:8080`
+
+### Requiremets
+Docker
 
 ## Usage
 
